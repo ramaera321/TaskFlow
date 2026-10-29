@@ -53,19 +53,49 @@ function App() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4">
-        <div className="w-full max-w-md bg-slate-900/50 backdrop-blur-xl border border-slate-800 p-8 rounded-3xl shadow-2xl">
-          <h2 className="text-2xl font-bold text-white mb-6">{isLogin ? 'Welcome back' : 'Create account'}</h2>
-          <form onSubmit={handleAuth} className="space-y-4">
-            <input type="email" placeholder="Email" className="w-full bg-slate-950 border border-slate-800 text-white p-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" className="w-full bg-slate-950 border border-slate-800 text-white p-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setPassword(e.target.value)} required />
-            <button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold p-3 rounded-xl transition-all">
-              {isLogin ? 'Sign In' : 'Sign Up'}
+      <div className="min-h-screen w-full bg-[#0b0f17] flex items-center justify-center p-4 md:p-8 overflow-hidden">
+        <div className="w-full max-w-md bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 rounded-3xl p-8 shadow-2xl shadow-blue-950/20">
+          {/* Sliding Tabs */}
+          <div className="relative bg-slate-800/60 p-1 rounded-2xl flex mb-8">
+            <div 
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-blue-600 rounded-xl transition-all duration-300 ease-in-out ${isLogin ? 'left-1' : 'left-[calc(50%+2px)]'}`} 
+            />
+            <button 
+              onClick={() => setIsLogin(true)} 
+              className={`flex-1 py-2 text-sm font-medium text-white z-10 transition-colors ${isLogin ? 'text-white' : 'text-slate-400'}`}
+            >
+              Login
             </button>
-          </form>
-          <p className="mt-6 text-sm text-center text-slate-500 cursor-pointer hover:text-indigo-400" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Don\'t have an account? Sign up' : 'Already have an account? Sign in'}
-          </p>
+            <button 
+              onClick={() => setIsLogin(false)} 
+              className={`flex-1 py-2 text-sm font-medium text-white z-10 transition-colors ${!isLogin ? 'text-white' : 'text-slate-400'}`}
+            >
+              Sign Up
+            </button>
+          </div>
+
+          {/* Form Slider */}
+          <div className="overflow-hidden">
+            <div className={`flex transition-transform duration-300 ease-in-out ${isLogin ? 'translate-x-0' : '-translate-x-full'}`}>
+              {/* Login Form */}
+              <form onSubmit={handleAuth} className="w-full flex-shrink-0 space-y-4">
+                <input type="email" placeholder="Email" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setEmail(e.target.value)} required />
+                <input type="password" placeholder="Password" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setPassword(e.target.value)} required />
+                <button className="w-full bg-blue-600 text-white font-semibold rounded-xl py-3 hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200 shadow-lg shadow-blue-600/30">
+                  Sign In
+                </button>
+              </form>
+
+              {/* Register Form */}
+              <form onSubmit={handleAuth} className="w-full flex-shrink-0 space-y-4">
+                <input type="email" placeholder="Email" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setEmail(e.target.value)} required />
+                <input type="password" placeholder="Password" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setPassword(e.target.value)} required />
+                <button className="w-full bg-blue-600 text-white font-semibold rounded-xl py-3 hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200 shadow-lg shadow-blue-600/30">
+                  Sign Up
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );
