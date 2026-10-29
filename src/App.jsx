@@ -54,21 +54,22 @@ function App() {
   if (!user) {
     return (
       <div className="min-h-screen w-full bg-[#0b0f17] flex items-center justify-center p-4 md:p-8 overflow-hidden">
-        <div className="w-full max-w-md bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 rounded-3xl p-8 shadow-2xl shadow-blue-950/20">
+        <div className="w-full max-w-sm bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 sm:p-7 shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)]">
+          {/* Header */}
+          <h1 className="text-2xl font-extrabold tracking-tight text-white text-center mb-1">TODO LIST</h1>
+          <p className="text-xs text-slate-400 text-center mb-6">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
+
           {/* Sliding Tabs */}
-          <div className="relative bg-slate-800/60 p-1 rounded-2xl flex mb-8">
-            <div 
-              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-blue-600 rounded-xl transition-all duration-300 ease-in-out ${isLogin ? 'left-1' : 'left-[calc(50%+2px)]'}`} 
-            />
+          <div className="bg-slate-950/80 p-1 rounded-xl border border-white/5 mb-6 flex w-full">
             <button 
               onClick={() => setIsLogin(true)} 
-              className={`flex-1 py-2 text-sm font-medium text-white z-10 transition-colors ${isLogin ? 'text-white' : 'text-slate-400'}`}
+              className={`flex-1 py-1.5 text-sm font-medium rounded-lg transition-all ${isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               Login
             </button>
             <button 
               onClick={() => setIsLogin(false)} 
-              className={`flex-1 py-2 text-sm font-medium text-white z-10 transition-colors ${!isLogin ? 'text-white' : 'text-slate-400'}`}
+              className={`flex-1 py-1.5 text-sm font-medium rounded-lg transition-all ${!isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               Sign Up
             </button>
@@ -78,24 +79,40 @@ function App() {
           <div className="overflow-hidden">
             <div className={`flex transition-transform duration-300 ease-in-out ${isLogin ? 'translate-x-0' : '-translate-x-full'}`}>
               {/* Login Form */}
-              <form onSubmit={handleAuth} className="w-full flex-shrink-0 space-y-4">
-                <input type="email" placeholder="Email" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setPassword(e.target.value)} required />
-                <button className="w-full bg-blue-600 text-white font-semibold rounded-xl py-3 hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200 shadow-lg shadow-blue-600/30">
+              <form onSubmit={handleAuth} className="w-full flex-shrink-0">
+                <label className="block text-xs font-medium text-slate-300 mb-1.5 text-left">Email Address</label>
+                <input type="email" placeholder="name@example.com" className="w-full bg-slate-800/40 border border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white text-sm placeholder-slate-500 rounded-lg px-3.5 py-2 outline-none transition-all mb-4" onChange={e => setEmail(e.target.value)} required />
+                
+                <label className="block text-xs font-medium text-slate-300 mb-1.5 text-left">Password</label>
+                <input type="password" placeholder="••••••••" className="w-full bg-slate-800/40 border border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white text-sm placeholder-slate-500 rounded-lg px-3.5 py-2 outline-none transition-all mb-4" onChange={e => setPassword(e.target.value)} required />
+                
+                <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold text-sm rounded-lg py-2.5 shadow-md shadow-blue-600/20 transition-all cursor-pointer mt-2">
                   Sign In
                 </button>
               </form>
 
               {/* Register Form */}
-              <form onSubmit={handleAuth} className="w-full flex-shrink-0 space-y-4">
-                <input type="email" placeholder="Email" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" className="w-full bg-slate-800/40 border border-slate-700/50 text-white p-3 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" onChange={e => setPassword(e.target.value)} required />
-                <button className="w-full bg-blue-600 text-white font-semibold rounded-xl py-3 hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200 shadow-lg shadow-blue-600/30">
+              <form onSubmit={handleAuth} className="w-full flex-shrink-0">
+                <label className="block text-xs font-medium text-slate-300 mb-1.5 text-left">Email Address</label>
+                <input type="email" placeholder="name@example.com" className="w-full bg-slate-800/40 border border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white text-sm placeholder-slate-500 rounded-lg px-3.5 py-2 outline-none transition-all mb-4" onChange={e => setEmail(e.target.value)} required />
+                
+                <label className="block text-xs font-medium text-slate-300 mb-1.5 text-left">Password</label>
+                <input type="password" placeholder="••••••••" className="w-full bg-slate-800/40 border border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white text-sm placeholder-slate-500 rounded-lg px-3.5 py-2 outline-none transition-all mb-4" onChange={e => setPassword(e.target.value)} required />
+                
+                <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold text-sm rounded-lg py-2.5 shadow-md shadow-blue-600/20 transition-all cursor-pointer mt-2">
                   Sign Up
                 </button>
               </form>
             </div>
           </div>
+
+          {/* Footer Link */}
+          <p className="text-xs text-slate-400 text-center mt-5">
+            {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}
+            <span onClick={() => setIsLogin(!isLogin)} className="text-blue-400 hover:underline font-medium cursor-pointer ml-1">
+              {isLogin ? "Registrasi dulu" : "Login di sini"}
+            </span>
+          </p>
         </div>
       </div>
     );
