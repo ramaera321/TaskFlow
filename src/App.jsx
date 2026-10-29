@@ -56,7 +56,7 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         <form onSubmit={handleAuth} className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-          <h2 className="text-2xl font-bold mb-4">{isLogin ? 'Login' : 'Register'}</h2>
+          <h2 className="text-9xl font-bold mb-4">{isLogin ? 'Login' : 'Register'}</h2>
           <input type="email" placeholder="Email" className="w-full p-2 mb-2 border rounded" onChange={e => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" className="w-full p-2 mb-4 border rounded" onChange={e => setPassword(e.target.value)} required />
           <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
