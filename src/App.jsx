@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { useAuth } from './context/AuthContext';
 import { useTodos } from './hooks/useTodos';
 import TodoCard from './components/TodoCard';
+import { CheckCircle2, Plus, LogOut, LayoutDashboard } from 'lucide-react';
 
 function App() {
   const { user, login, register, logout } = useAuth();
   const { todos, addTodo, updateTodo, deleteTodo, toggleDetail } = useTodos();
 
-  // State untuk Auth
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // State untuk Form Todo
   const [judul, setJudul] = useState('');
   const [tanggal, setTanggal] = useState('');
   const [details, setDetails] = useState('');
@@ -35,7 +34,7 @@ function App() {
       judul,
       tanggal_target: tanggal,
       status: 'active',
-      details: details.split(',').map(d => ({ 
+      details: details.split(',').filter(d => d.trim() !== '').map(d => ({ 
         id: Date.now().toString() + Math.random(), 
         teks: d.trim(), 
         isDone: false 
@@ -54,47 +53,68 @@ function App() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-        <form onSubmit={handleAuth} className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-          <h2 className="text-9xl font-bold mb-4">{isLogin ? 'Login' : 'Register'}</h2>
-          <input type="email" placeholder="Email" className="w-full p-2 mb-2 border rounded" onChange={e => setEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" className="w-full p-2 mb-4 border rounded" onChange={e => setPassword(e.target.value)} required />
-          <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-            {isLogin ? 'Login' : 'Daftar'}
-          </button>
-          <p className="mt-4 text-sm text-center cursor-pointer text-blue-500" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Belum punya akun? Daftar di sini' : 'Sudah punya akun? Login di sini'}
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4">
+        <div className="w-full max-w-md bg-slate-900/50 backdrop-blur-xl border border-slate-800 p-8 rounded-3xl shadow-2xl">
+          <h2 className="text-2xl font-bold text-white mb-6">{isLogin ? 'Welcome back' : 'Create account'}</h2>
+          <form onSubmit={handleAuth} className="space-y-4">
+            <input type="email" placeholder="Email" className="w-full bg-slate-950 border border-slate-800 text-white p-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" className="w-full bg-slate-950 border border-slate-800 text-white p-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setPassword(e.target.value)} required />
+            <button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold p-3 rounded-xl transition-all">
+              {isLogin ? 'Sign In' : 'Sign Up'}
+            </button>
+          </form>
+          <p className="mt-6 text-sm text-center text-slate-500 cursor-pointer hover:text-indigo-400" onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? 'Don\'t have an account? Sign up' : 'Already have an account? Sign in'}
           </p>
-        </form>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
-      <nav className="flex justify-between items-center mb-8 bg-white p-4 rounded shadow-sm">
-        <h1 className="font-bold text-xl">Todo Checklist</h1>
-        <button onClick={logout} className="text-red-500 hover:text-red-700 font-medium">Logout</button>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-200">
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <nav className="flex justify-between items-center mb-12 bg-slate-900/50 backdrop-blur-xl border border-slate-800/80 p-4 rounded-2xl shadow-lg">
+          <div className="flex items-center gap-2">
+            <LayoutDashboard className="text-indigo-500" />
+            <h1 className="font-bold text-lg text-white">TaskFlow</h1>
+          </div>
+          <button onClick={logout} className="flex items-center gap-2 text-sm text-slate-400 hover:text-rose-400 transition-colors">
+            <LogOut size={16} /> Logout
+          </button>
+        </nav>
 
-      <form onSubmit={handleAddTodo} className="bg-white p-6 rounded shadow-sm mb-8 max-w-2xl mx-auto">
-        <h2 className="font-bold mb-4">Tambah Todo Baru</h2>
-        <input placeholder="Judul Todo" className="w-full p-2 mb-2 border rounded" value={judul} onChange={e => setJudul(e.target.value)} required />
-        <input type="date" className="w-full p-2 mb-2 border rounded" value={tanggal} onChange={e => setTanggal(e.target.value)} required />
-        <input placeholder="Detail (pisahkan dengan koma, contoh: Beli susu, Cuci baju)" className="w-full p-2 mb-4 border rounded" value={details} onChange={e => setDetails(e.target.value)} />
-        <button className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">Simpan Todo</button>
-      </form>
+        <form onSubmit={handleAddTodo} className="bg-slate-900/50 backdrop-blur-xl border border-slate-800/80 p-6 rounded-2xl mb-12 shadow-xl">
+          <h2 className="font-semibold text-white mb-4">Create New Task</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input placeholder="Task title" className="bg-slate-950 border border-slate-800 p-3 rounded-xl text-white" value={judul} onChange={e => setJudul(e.target.value)} required />
+            <input type="date" className="bg-slate-950 border border-slate-800 p-3 rounded-xl text-white" value={tanggal} onChange={e => setTanggal(e.target.value)} required />
+          </div>
+          <input placeholder="Details (comma separated)" className="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl mt-4 text-white" value={details} onChange={e => setDetails(e.target.value)} />
+          <button className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold p-3 rounded-xl transition-all flex items-center justify-center gap-2">
+            <Plus size={18} /> Add Task
+          </button>
+        </form>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {todos.map(todo => (
-          <TodoCard 
-            key={todo.id} 
-            todo={todo} 
-            onToggleDetail={toggleDetail} 
-            onDelete={deleteTodo} 
-            onUpdateStatus={handleUpdateStatus} 
-          />
-        ))}
+        {todos.length === 0 ? (
+          <div className="border-2 border-dashed border-slate-800 rounded-3xl p-12 text-center flex flex-col items-center">
+            <CheckCircle2 size={48} className="text-slate-600 mb-4" />
+            <h3 className="text-xl font-semibold text-slate-300">No tasks yet</h3>
+            <p className="text-slate-500 mt-2">Get started by creating your first task above.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {todos.map(todo => (
+              <TodoCard 
+                key={todo.id} 
+                todo={todo} 
+                onToggleDetail={toggleDetail} 
+                onDelete={deleteTodo} 
+                onUpdateStatus={handleUpdateStatus} 
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
