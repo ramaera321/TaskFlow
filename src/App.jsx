@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import { useTodos } from './hooks/useTodos';
 import TodoCard from './components/TodoCard';
 import AddTodoModal from './components/AddTodoModal';
+import Footer from './components/Footer';
 import { LogOut, Sun, Moon, Plus, RotateCw } from 'lucide-react';
 
 function App() {
@@ -83,9 +84,6 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    // Atau versi lebih ringkas:
-    // document.documentElement.classList.toggle('dark', theme === 'dark');
 
     localStorage.setItem('app_theme', theme);
   }, [theme]);
@@ -237,6 +235,8 @@ function App() {
           </button>
         )}
       </main>
+
+      <Footer />
 
       <AddTodoModal 
         isOpen={isModalOpen} 
