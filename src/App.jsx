@@ -179,7 +179,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-2">
+      <main className="max-w-6xl mx-auto px-6 pt-2 pb-10 md:pb-12">
         {/* Sub-header */}
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between items-end mb-6 md:mb-8">
           <div>
