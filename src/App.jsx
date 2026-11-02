@@ -90,7 +90,7 @@ function App() {
         {/* Theme Toggle */}
         <button 
           onClick={toggleTheme}
-          className="fixed top-4 right-4 z-50 p-2 rounded-full bg-slate-800/50 backdrop-blur-md border border-white/10 hover:bg-slate-700 transition-all"
+          className="fixed top-4 right-4 z-50 p-2 rounded-full cursor-pointer bg-slate-800/50 backdrop-blur-md border border-white/10 hover:bg-slate-700 transition-all"
         >
           {isDark ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-slate-600" />}
         </button>
@@ -106,13 +106,13 @@ function App() {
           <div className={`p-1 rounded-xl border mb-6 flex w-full ${isDark ? 'bg-slate-950/80 border-white/5' : 'bg-slate-200/50 border-black/5'}`}>
             <button 
               onClick={() => setIsLogin(true)} 
-              className={`flex-1 py-1.5 text-sm font-medium rounded-lg transition-all ${isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
             >
               Login
             </button>
             <button 
               onClick={() => setIsLogin(false)} 
-              className={`flex-1 py-1.5 text-sm font-medium rounded-lg transition-all ${!isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${!isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
             >
               Sign Up
             </button>
