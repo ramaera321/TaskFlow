@@ -56,8 +56,10 @@ function App() {
       <div className="min-h-screen w-full bg-[#0b0f17] flex items-center justify-center p-4 md:p-8 overflow-hidden">
         <div className="w-full max-w-sm bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 sm:p-7 shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)]">
           {/* Header */}
-          <h1 className="text-2xl font-extrabold tracking-tight text-white text-center mb-1">TODO LIST</h1>
-          <p className="text-xs text-slate-400 text-center mb-6">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
+          <div className="mb-6 pt-4">
+            <p className="text-3xl font-extrabold tracking-tight text-white text-center mb-2">TODO LIST</p>
+            <p className="text-xs text-slate-400 text-center mb-6">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
+          </div>
 
           {/* Sliding Tabs */}
           <div className="bg-slate-950/80 p-1 rounded-xl border border-white/5 mb-6 flex w-full">
