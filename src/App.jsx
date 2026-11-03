@@ -69,6 +69,19 @@ function App() {
     setIsModalOpen(true);
   };
 
+  const handleResetTodo = (todoId) => {
+    const todoToReset = todos.find(t => t.id === todoId);
+    if (todoToReset) {
+      const updatedTodo = {
+        ...todoToReset,
+        status: 'active',
+        details: todoToReset.details.map(d => ({ ...d, isDone: false })),
+        completedAt: undefined
+      };
+      updateTodo(updatedTodo);
+    }
+  };
+
   const filteredTodos = todos.filter(todo => {
     const matchesStatus = filterStatus === 'Semua Status' || todo.status === filterStatus.toLowerCase();
     return matchesStatus;
@@ -140,6 +153,7 @@ function App() {
         onAddTodo={() => { setEditingTodo(null); setIsModalOpen(true); }}
         onEditTodo={handleEdit}
         onDeleteTodo={deleteTodo}
+        onResetTodo={handleResetTodo}
         onToggleDetail={toggleDetail}
         onUpdateStatus={updateTodo}
         filterStatus={filterStatus}

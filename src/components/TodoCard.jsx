@@ -1,7 +1,10 @@
-import React from 'react';
-import { CheckSquare, Square, Calendar, Trash2, Pencil } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { CheckSquare, Square, Calendar, Trash2, Pencil, MoreVertical, RotateCcw } from 'lucide-react';
 
-const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) => {
+const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit, onReset }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
   const today = new Date();
   const targetDate = new Date(todo.tanggal_target);
   const diffTime = targetDate - today;
@@ -17,15 +20,56 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
 
   const allDone = todo.details.length > 0 && todo.details.every(d => d.isDone);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className="rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className={`p-5 ${headerBg}`}>
         <div className="flex justify-between items-start mb-3">
           <h3 className="font-bold text-lg leading-tight">{todo.judul}</h3>
-          <div className="flex gap-2">
-            <button onClick={() => onEdit(todo)} className="cursor-pointer opacity-70 hover:opacity-100"><Pencil size={16} /></button>
-            <button onClick={() => onDelete(todo.id)} className="cursor-pointer opacity-70 hover:opacity-100"><Trash2 size={16} /></button>
+          
+          {/* Kebab Menu */}
+          <div className="relative" ref={menuRef}>
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="cursor-pointer opacity-70 hover:opacity-100 p-1 rounded-full hover:bg-black/5"
+            >
+              <MoreVertical size={18} />
+            </button>
+            
+            {isMenuOpen && (
+              <div className="absolute right-0 top-8 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg z-20 py-1 text-sm">
+                <button 
+                  onClick={() => { onEdit(todo); setIsMenuOpen(false); }}
+                  className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2"
+                >
+                  <Pencil size={14} /> Edit
+                </button>
+                <button 
+                  onClick={() => { onReset(todo.id); setIsMenuOpen(false); }}
+                  disabled={todo.status !== 'selesai'}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 ${todo.status !== 'selesai' ? 'opacity-40 cursor-not-allowed' : ''}`}
+                >
+                  <RotateCcw size={14} /> Reset
+                </button>
+                <button 
+                  onClick={() => { onDelete(todo.id); setIsMenuOpen(false); }}
+                  className="w-full text-left px-4 py-2 hover:bg-red-50 dark:hover:bg-red-950/40 text-red-500 flex items-center gap-2"
+                >
+                  <Trash2 size={14} /> Hapus
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex items-center text-xs font-medium">
@@ -40,8 +84,8 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
           {todo.details.map((detail) => (
             <div 
               key={detail.id} 
-              className="flex items-center cursor-pointer"
-              onClick={() => onToggleDetail(todo.id, detail.id)}
+              className={`flex items-center ${todo.status === 'selesai' ? 'cursor-default' : 'cursor-pointer'}`}
+              onClick={() => todo.status !== 'selesai' && onToggleDetail(todo.id, detail.id)}
             >
               <div className={`mr-2 ${detail.isDone ? 'text-slate-400 dark:text-slate-400' : 'text-slate-600 dark:text-slate-200'}`}>
                 {detail.isDone ? <CheckSquare size={16} /> : <Square size={16} />}
