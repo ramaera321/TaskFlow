@@ -43,12 +43,21 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit, onRe
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const formatCardTitle = (title) => {  
+    if (!title) return '';  
+    const words = title.split(' ');  
+    if (words.length > 6) {  
+      return words.slice(0, 6).join(' ') + '...';  
+    }  
+    return title;  
+  };
+
   return (
     <div className="rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className={`p-5 ${headerBg}`}>
         <div className="flex justify-between items-start mb-3">
-          <h3 className="font-bold text-lg leading-tight">{todo.judul}</h3>
+          <h3 className="font-bold text-lg leading-tight" title={todo.judul}>{formatCardTitle(todo.judul)}</h3>
           
           {/* Kebab Menu */}
           <div className="relative" ref={menuRef}>

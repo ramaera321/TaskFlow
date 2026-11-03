@@ -168,6 +168,7 @@ function App() {
         setTimeFilter={setTimeFilter}
         visibleCount={visibleCount}
         setVisibleCount={setVisibleCount}
+        user={user}
       />
 
       <AddTodoModal 

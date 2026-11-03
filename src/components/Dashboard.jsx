@@ -3,7 +3,7 @@ import TodoCard from './TodoCard';
 import Footer from './Footer';
 import { LogOut, Sun, Moon, Plus, RotateCw } from 'lucide-react';
 
-const Dashboard = ({ 
+const Dashboard.jsx = ({ 
   todos, 
   isDark, 
   toggleTheme, 
@@ -19,7 +19,8 @@ const Dashboard = ({
   timeFilter, 
   setTimeFilter, 
   visibleCount, 
-  setVisibleCount 
+  setVisibleCount,
+  user
 }) => {
 
   // Helper: Cek apakah tanggal berada di minggu ini (Senin - Minggu)
@@ -81,14 +82,23 @@ const Dashboard = ({
     setVisibleCount(8);
   };
 
+  const rawUsername = user?.email ? user.email.split('@')[0] : 'User';
+  const truncatedUsername = rawUsername.length > 7 ? rawUsername.slice(0, 7) + '...' : rawUsername;
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#f1f2ec] text-slate-800'}`}>
       {/* Header */}
       <header className="flex justify-between items-center px-6 py-4 shadow mb-4 bg-[#86bfb9] dark:bg-[#141a25] text-slate-900 dark:text-slate-200">
         <div className="font-bold text-xl">TaskFlow</div>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-3">
+          <span className="font-semibold text-sm sm:inline block sm:mr-1">
+            <span className="sm:hidden">{truncatedUsername}</span>
+            <span className="hidden sm:inline">{rawUsername}</span>
+          </span>
           <button onClick={toggleTheme} className="p-2 rounded-full bg-black/10 cursor-pointer">{isDark ? <Sun size={20} /> : <Moon size={20} />}</button>
-          <button onClick={logout} className="flex items-center gap-2 text-sm cursor-pointer font-medium"><LogOut size={16} /> Logout</button>
+          <button onClick={logout} className="p-2 rounded-xl hover:bg-black/10 dark:hover:bg-white/10 transition-all cursor-pointer" title="Logout">
+            <LogOut size={18} strokeWidth={2.5} />
+          </button>
         </div>
       </header>
 
