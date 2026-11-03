@@ -22,20 +22,20 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
       {/* Header */}
       <div className={`p-5 ${headerBg}`}>
         <div className="flex justify-between items-start mb-3">
-          <h3 className="font-bold text-[16px] leading-tight">{todo.judul}</h3>
+          <h3 className="font-bold text-lg text-slate-800 leading-tight">{todo.judul}</h3>
           <div className="flex gap-2">
-            <button onClick={() => onEdit(todo)} className="text-slate-700/50 hover:text-blue-600"><Pencil size={16} /></button>
-            <button onClick={() => onDelete(todo.id)} className="text-slate-700/50 hover:text-red-600"><Trash2 size={16} /></button>
+            <button onClick={() => onEdit(todo)} className="cursor-pointer text-slate-700/50 hover:text-blue-600"><Pencil size={16} /></button>
+            <button onClick={() => onDelete(todo.id)} className="cursor-pointer text-slate-700/50 hover:text-red-600"><Trash2 size={16} /></button>
           </div>
         </div>
-        <div className="flex items-center text-xs font-medium opacity-70">
-          <Calendar size={12} className="mr-1" />
+        <div className="flex items-center text-xs font-medium text-slate-800">
+          <Calendar size={14} className="mr-1 mt-0.5" />
           {todo.tanggal_target}
         </div>
       </div>
 
       {/* Body */}
-      <div className="bg-white dark:bg-[#0b0f17] p-5 flex-1 flex flex-col justify-between border-t border-slate-100 dark:border-slate-800">
+      <div className="bg-white dark:bg-[#171d2a] p-5 flex-1 flex flex-col justify-between border-t border-slate-100 dark:border-slate-800">
         <div className="max-h-48 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden space-y-2 mb-4">
           {todo.details.map((detail) => (
             <div 
@@ -43,10 +43,10 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
               className="flex items-center cursor-pointer"
               onClick={() => onToggleDetail(todo.id, detail.id)}
             >
-              <div className="mr-2 text-slate-800 dark:text-slate-300">
+              <div className={`mr-2 ${detail.isDone ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>
                 {detail.isDone ? <CheckSquare size={16} /> : <Square size={16} />}
               </div>
-              <span className={`text-sm ${detail.isDone ? 'line-through text-slate-400' : 'dark:text-slate-200'}`}>
+              <span className={`text-sm ${detail.isDone ? 'line-through text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>
                 {detail.teks}
               </span>
             </div>
