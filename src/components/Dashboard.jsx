@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import TodoCard from './TodoCard';
 import Footer from './Footer';
 import { LogOut, Sun, Moon, Plus, RotateCw } from 'lucide-react';
@@ -19,9 +19,48 @@ const Dashboard = ({
   timeFilter, 
   setTimeFilter, 
   visibleCount, 
-  setVisibleCount, 
-  filteredTodos 
+  setVisibleCount 
 }) => {
+
+  // Helper: Cek apakah tanggal berada di minggu ini (Senin - Minggu)
+  const isThisWeek = (dateString) => {
+    const target = new Date(dateString);
+    const now = new Date();
+    const day = now.getDay();
+    // Hitung hari Senin minggu ini
+    const diffToMonday = now.getDate() - (day === 0 ? 6 : day - 1);
+    const startOfWeek = new Date(now.setDate(diffToMonday));
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+
+    return target >= startOfWeek && target <= endOfWeek;
+  };
+
+  // Chained Filtering Logic
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) => {
+      // 1. Week Filter Check
+      const matchesWeek = timeFilter === 'All Weeks' || isThisWeek(todo.tanggal_target);
+
+      // 2. Status Filter Check
+      const matchesStatus = filterStatus === 'Semua Status' || todo.status === filterStatus.toLowerCase();
+
+      return matchesWeek && matchesStatus;
+    });
+  }, [todos, timeFilter, filterStatus]);
+
+  // Slice data untuk pagination
+  const visibleTodos = filteredTodos.slice(0, visibleCount);
+
+  // Handler untuk mengubah filter dan mereset pagination
+  const handleFilterChange = (setter, value) => {
+    setter(value);
+    setVisibleCount(8);
+  };
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#f1f2ec] text-slate-800'}`}>
       {/* Header */}
@@ -44,7 +83,7 @@ const Dashboard = ({
             {['This Week', 'All Weeks'].map(t => (
               <button 
                 key={t} 
-                onClick={() => setTimeFilter(t)} 
+                onClick={() => handleFilterChange(setTimeFilter, t)} 
                 className={`px-4 py-1 rounded-full text-sm transition-all cursor-pointer hover:opacity-90 ${timeFilter === t && !isDark ? 'bg-[#fd671a] text-white' : timeFilter === t ? 'bg-slate-800 text-white' : ''}`}
               >
                 {t}
@@ -60,7 +99,7 @@ const Dashboard = ({
           </button>
           <select 
             className={`border cursor-pointer rounded-xl px-4 py-2 bg-transparent ${isDark ? 'text-white border-slate-700' : 'text-slate-800 border-slate-300'}`} 
-            onChange={(e) => setFilterStatus(e.target.value)}
+            onChange={(e) => handleFilterChange(setFilterStatus, e.target.value)}
             value={filterStatus}
           >
             <option className="text-slate-900">Semua Status</option>
@@ -71,19 +110,25 @@ const Dashboard = ({
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filteredTodos.slice(0, visibleCount).map(todo => (
-            <TodoCard 
-              key={todo.id} 
-              todo={todo} 
-              onToggleDetail={onToggleDetail} 
-              onDelete={onDeleteTodo} 
-              onUpdateStatus={onUpdateStatus}
-              onEdit={onEditTodo}
-              onReset={onResetTodo}
-            />
-          ))}
-        </div>
+        {filteredTodos.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {visibleTodos.map(todo => (
+              <TodoCard 
+                key={todo.id} 
+                todo={todo} 
+                onToggleDetail={onToggleDetail} 
+                onDelete={onDeleteTodo} 
+                onUpdateStatus={onUpdateStatus}
+                onEdit={onEditTodo}
+                onReset={onResetTodo}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 text-slate-500">
+            <p>Tidak ada todo yang sesuai dengan filter ini.</p>
+          </div>
+        )}
 
         {filteredTodos.length > visibleCount && (
           <button onClick={() => setVisibleCount(prev => prev + 8)} className="flex items-center gap-2 text-[#fd671a] font-medium mx-auto mt-10 hover:text-[#e0560f] cursor-pointer">

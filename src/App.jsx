@@ -82,11 +82,6 @@ function App() {
     }
   };
 
-  const filteredTodos = todos.filter(todo => {
-    const matchesStatus = filterStatus === 'Semua Status' || todo.status === filterStatus.toLowerCase();
-    return matchesStatus;
-  });
-
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -162,7 +157,6 @@ function App() {
         setTimeFilter={setTimeFilter}
         visibleCount={visibleCount}
         setVisibleCount={setVisibleCount}
-        filteredTodos={filteredTodos}
       />
 
       <AddTodoModal 
