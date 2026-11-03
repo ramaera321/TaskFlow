@@ -7,7 +7,7 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="email" 
         placeholder="name@example.com" 
-        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
+        className="w-full bg-[#1c4f4a]/40 dark:bg-slate-800/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setEmail(e.target.value)} 
         required 
       />
@@ -16,7 +16,7 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="password" 
         placeholder="••••••••" 
-        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
+        className="w-full bg-[#1c4f4a]/40 dark:bg-slate-800/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setPassword(e.target.value)} 
         required 
       />
@@ -25,7 +25,7 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="password" 
         placeholder="••••••••" 
-        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
+        className="w-full bg-[#1c4f4a]/40 dark:bg-slate-800/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setConfirmPassword(e.target.value)} 
         required 
       />

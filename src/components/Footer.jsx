@@ -4,9 +4,9 @@ import { FaInstagram, FaFacebook, FaYoutube, FaThreads } from 'react-icons/fa6';
 const Footer = () => {
   return (
     <footer className="w-full bg-white dark:bg-[#0b0f17] text-slate-800 dark:text-white border-t border-slate-200 dark:border-slate-800">
-      <div className="w-full px-6 pt-10 pb-4 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="w-full px-6 pt-10 pb-4 max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-start">
         {/* Left: Brand & Socials */}
-        <div>
+        <div className="md:w-6/10">
           <h2 className="text-[1.5rem] md:text-[1rem] font-bold tracking-wide uppercase mb-1">TaskFlow</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
           <div className="hidden md:flex items-center gap-4 text-slate-600 dark:text-slate-300 mt-4">
@@ -18,9 +18,9 @@ const Footer = () => {
         </div>
 
         {/* Right: Email Info & Subscribe */}
-        <div className="md:text-right">
-          <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-900 px-4 py-2 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-300 w-fit mb-4">
-            <Mail size={14} /> ramaera321@gmail.com
+        <div className="md:text-right md:w-4/10">
+          <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-900 px-4 py-2 rounded text-sm font-medium text-slate-700 dark:text-slate-300 w-fit mb-4">
+            <Mail size={18} className='mt-1' /> ramaera321@gmail.com
           </div>
           <span className="text-sm md:text-left font-semibold mb-2 block">Apakah Anda Ingin Memasukkan Email Anda?</span>
           <div className="flex gap-2 items-center">
@@ -44,7 +44,7 @@ const Footer = () => {
 
 
       {/* Bottom Copyright Bar */}
-      <div className="w-full bg-[#f6b327] text-slate-900 font-medium py-3 text-center text-xs">
+      <div className="w-full bg-[#86bfb9] dark:bg-[#141a25] dark:text-slate-200 text-slate-900 font-medium py-3 text-center text-xs">
         © 2026 by Mohamad Romli Firdaus Kamarula. Seluruh Hak Dilindungi.
       </div>
     </footer>
