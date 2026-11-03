@@ -7,7 +7,7 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="email" 
         placeholder="name@example.com" 
-        className={`w-full border focus:ring-1 focus:ring-blue-500 text-sm rounded-lg px-3.5 py-2 outline-none transition-all mb-4 ${isDark ? 'bg-slate-800/40 border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white placeholder-slate-500' : 'bg-white/60 border-slate-300/60 focus:border-amber-600 text-[#3D3535] placeholder-slate-400'}`} 
+        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setEmail(e.target.value)} 
         required 
       />
@@ -16,7 +16,7 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="password" 
         placeholder="••••••••" 
-        className={`w-full border focus:ring-1 focus:ring-blue-500 text-sm rounded-lg px-3.5 py-2 outline-none transition-all mb-4 ${isDark ? 'bg-slate-800/40 border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white placeholder-slate-500' : 'bg-white/60 border-slate-300/60 focus:border-amber-600 text-[#3D3535] placeholder-slate-400'}`} 
+        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setPassword(e.target.value)} 
         required 
       />
@@ -25,12 +25,12 @@ const RegisterForm = ({ onRegister, onSwitch, isDark, setEmail, setPassword, set
       <input 
         type="password" 
         placeholder="••••••••" 
-        className={`w-full border focus:ring-1 focus:ring-blue-500 text-sm rounded-lg px-3.5 py-2 outline-none transition-all mb-4 ${isDark ? 'bg-slate-800/40 border-white/10 focus:border-blue-500 focus:bg-slate-800/60 text-white placeholder-slate-500' : 'bg-white/60 border-slate-300/60 focus:border-amber-600 text-[#3D3535] placeholder-slate-400'}`} 
+        className="w-full bg-[#1c4f4a]/40 border border-white/20 focus:border-[#f6b327] text-white placeholder-slate-300 rounded-xl px-3.5 py-2 text-sm outline-none transition-all mb-4" 
         onChange={e => setConfirmPassword(e.target.value)} 
         required 
       />
       
-      <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold text-sm rounded-lg py-2.5 shadow-md shadow-blue-600/20 transition-all cursor-pointer mt-2">
+      <button className="w-full bg-[#fd671a] hover:bg-[#e0560f] active:scale-[0.98] text-white font-semibold text-sm rounded-xl py-2.5 shadow-md transition-all cursor-pointer mt-2">
         Sign Up
       </button>
     </form>

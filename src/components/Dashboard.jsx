@@ -22,13 +22,13 @@ const Dashboard = ({
   filteredTodos 
 }) => {
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#FBF7F0] text-[#3D3535]'}`}>
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#f1f2ec] text-slate-800'}`}>
       {/* Header */}
-      <header className="flex justify-between items-center px-6 py-4 shadow mb-4 bg-[#F2C49B] dark:bg-slate-900">
+      <header className="flex justify-between items-center px-6 py-4 shadow mb-4 bg-[#f6b327] text-slate-900">
         <div className="font-bold text-xl">TaskFlow</div>
         <div className="flex gap-4">
-          <button onClick={toggleTheme} className="p-2 rounded-full bg-slate-800/10 cursor-pointer">{isDark ? <Sun size={20} /> : <Moon size={20} />}</button>
-          <button onClick={logout} className="flex items-center gap-2 text-sm cursor-pointer"><LogOut size={16} /> Logout</button>
+          <button onClick={toggleTheme} className="p-2 rounded-full bg-black/10 cursor-pointer">{isDark ? <Sun size={20} /> : <Moon size={20} />}</button>
+          <button onClick={logout} className="flex items-center gap-2 text-sm cursor-pointer font-medium"><LogOut size={16} /> Logout</button>
         </div>
       </header>
 
@@ -39,12 +39,12 @@ const Dashboard = ({
             <h1 className="text-[1.5rem] font-bold tracking-tight">To-Do List</h1>
             <p className="opacity-70">Catat dan kelola todo list-mu secara efisien</p>
           </div>
-          <div className={`flex p-1 rounded-full border ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white border-[#EBE3D7] shadow-sm'}`}>
+          <div className={`flex p-1 rounded-full border ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
             {['This Week', 'All Weeks'].map(t => (
               <button 
                 key={t} 
                 onClick={() => setTimeFilter(t)} 
-                className={`px-4 py-1 rounded-full text-sm transition-all cursor-pointer hover:opacity-90 ${timeFilter === t && !isDark ? 'bg-[#D97757] text-white' : timeFilter === t ? 'bg-slate-800' : ''}`}
+                className={`px-4 py-1 rounded-full text-sm transition-all cursor-pointer hover:opacity-90 ${timeFilter === t && !isDark ? 'bg-[#fd671a] text-white' : timeFilter === t ? 'bg-slate-800 text-white' : ''}`}
               >
                 {t}
               </button>
@@ -54,11 +54,11 @@ const Dashboard = ({
 
         {/* Controls */}
         <div className="flex justify-end gap-3 items-center mb-8">
-          <button onClick={onAddTodo} className="cursor-pointer bg-[#D97757] text-white px-2 md:px-4 py-2 rounded-xl flex items-center gap-1 md:gap-2 hover:opacity-90 transition-all">
+          <button onClick={onAddTodo} className="cursor-pointer bg-[#fd671a] hover:bg-[#e0560f] active:scale-[0.98] text-white px-4 py-2 rounded-xl flex items-center gap-2 shadow-md transition-all">
             <Plus size={18} /> Add Todo
           </button>
           <select 
-            className={`border cursor-pointer rounded-xl px-4 py-2 bg-transparent ${isDark ? 'text-slate-900 bg-white' : ''}`} 
+            className={`border cursor-pointer rounded-xl px-4 py-2 bg-transparent ${isDark ? 'text-white border-slate-700' : 'text-slate-800 border-slate-300'}`} 
             onChange={(e) => setFilterStatus(e.target.value)}
             value={filterStatus}
           >
@@ -84,7 +84,7 @@ const Dashboard = ({
         </div>
 
         {filteredTodos.length > visibleCount && (
-          <button onClick={() => setVisibleCount(prev => prev + 8)} className="flex items-center gap-2 text-blue-600 font-medium mx-auto mt-10 hover:text-blue-700 cursor-pointer">
+          <button onClick={() => setVisibleCount(prev => prev + 8)} className="flex items-center gap-2 text-[#fd671a] font-medium mx-auto mt-10 hover:text-[#e0560f] cursor-pointer">
             <RotateCw size={18} /> Reload todo lebih banyak
           </button>
         )}

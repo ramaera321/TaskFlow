@@ -84,7 +84,7 @@ function App() {
   }, [theme]);
 
   if (!user) return (
-    <div className={`min-h-screen w-full flex items-center justify-center p-4 md:p-8 overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#FBF7F0] text-[#3D3535]'}`}>
+    <div className={`min-h-screen w-full flex items-center justify-center p-4 md:p-8 overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#f1f2ec] text-slate-800'}`}>
         <button 
           onClick={toggleTheme}
           className="fixed top-4 right-4 z-50 p-2 rounded-full cursor-pointer bg-slate-800/50 backdrop-blur-md border border-white/10 hover:bg-slate-700 transition-all"
@@ -92,22 +92,22 @@ function App() {
           {isDark ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-slate-600" />}
         </button>
 
-        <div className={`w-full max-w-sm backdrop-blur-2xl border rounded-2xl p-6 sm:p-7 shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] ${isDark ? 'bg-slate-900/40 border-white/10' : 'bg-white/40 border-black/10'}`}>
+        <div className="w-full max-w-sm bg-[#1c4f4a]/90 backdrop-blur-xl border border-white/10 text-white rounded-3xl p-6 sm:p-7 shadow-2xl">
           <div className="mb-6 pt-4">
             <p className="text-3xl font-extrabold tracking-tight text-center mb-2">TODO LIST</p>
-            <p className={`text-xs text-center mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
+            <p className="text-xs text-center mb-6 text-slate-300">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
           </div>
 
-          <div className={`p-1 rounded-xl border mb-6 flex w-full ${isDark ? 'bg-slate-950/80 border-white/5' : 'bg-slate-200/50 border-black/5'}`}>
+          <div className="p-1 rounded-xl border border-white/10 mb-6 flex w-full bg-slate-950/80">
             <button 
               onClick={() => setIsLogin(true)} 
-              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               Login
             </button>
             <button 
               onClick={() => setIsLogin(false)} 
-              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${!isLogin ? (isDark ? 'bg-slate-900/90 text-white shadow-sm' : 'bg-white text-[#3D3535] shadow-sm') : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-[#3D3535]')}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${!isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               Sign Up
             </button>
@@ -120,9 +120,9 @@ function App() {
             </div>
           </div>
 
-          <p className={`text-xs text-center mt-5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <p className="text-xs text-center mt-5 text-slate-300">
             {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}
-            <span onClick={() => setIsLogin(!isLogin)} className="text-blue-500 hover:underline font-medium cursor-pointer ml-1">
+            <span onClick={() => setIsLogin(!isLogin)} className="text-[#f6b327] hover:underline font-medium cursor-pointer ml-1">
               {isLogin ? "Registrasi dulu" : "Login di sini"}
             </span>
           </p>
