@@ -3,7 +3,7 @@ import TodoCard from './TodoCard';
 import Footer from './Footer';
 import { LogOut, Sun, Moon, Plus, RotateCw } from 'lucide-react';
 
-const Dashboard.jsx = ({ 
+const Dashboard = ({ 
   todos, 
   isDark, 
   toggleTheme, 
