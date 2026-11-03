@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Plus, Trash2 } from 'lucide-react';
 
 const AddTodoModal = ({ isOpen, onClose, onSave, todoToEdit }) => {
   const [judul, setJudul] = useState('');
   const [tanggal, setTanggal] = useState('');
   const [details, setDetails] = useState([{ id: Date.now(), teks: '', isDone: false }]);
+  const subtaskContainerRef = useRef(null);
 
   useEffect(() => {
     if (todoToEdit) {
@@ -17,6 +18,15 @@ const AddTodoModal = ({ isOpen, onClose, onSave, todoToEdit }) => {
       setDetails([{ id: Date.now(), teks: '', isDone: false }]);
     }
   }, [todoToEdit, isOpen]);
+
+  useEffect(() => {  
+    if (subtaskContainerRef.current) {  
+      subtaskContainerRef.current.scrollTo({  
+        top: subtaskContainerRef.current.scrollHeight,  
+        behavior: 'smooth'  
+      });  
+    }  
+  }, [details.length]);
 
   if (!isOpen) return null;
 
@@ -71,7 +81,7 @@ const AddTodoModal = ({ isOpen, onClose, onSave, todoToEdit }) => {
           
           <div className="space-y-2">
             <label className="text-sm font-medium">Subtasks</label>
-            <div className="max-h-40 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div ref={subtaskContainerRef} className="max-h-40 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {details.map((detail, index) => (
                 <div key={detail.id} className="flex gap-2 mb-2">
                   <input 
