@@ -92,22 +92,22 @@ function App() {
           {isDark ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-slate-600" />}
         </button>
 
-        <div className="w-full max-w-sm bg-[#1c4f4a]/90 backdrop-blur-xl border border-white/10 text-white rounded-3xl p-6 sm:p-7 shadow-2xl">
+        <div className="w-full max-w-sm bg-[#1c4f4a]/80 dark:bg-slate-900/80 backdrop-blur-xl border border-white/10 text-white rounded-3xl p-6 sm:p-7 shadow-2xl">
           <div className="mb-6 pt-4">
             <p className="text-3xl font-extrabold tracking-tight text-center mb-2">TODO LIST</p>
             <p className="text-xs text-center mb-6 text-slate-300">Kelola tugas harianmu dengan lebih terstruktur dan efisien.</p>
           </div>
 
-          <div className="p-1 rounded-xl border border-white/10 mb-6 flex w-full bg-slate-950/80">
+          <div className="p-1 rounded-xl border border-white/10 mb-6 flex w-full dark:bg-slate-950/80 bg-[#0e3733]">
             <button 
               onClick={() => setIsLogin(true)} 
-              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${isLogin ? 'dark:bg-slate-900/90 text-white shadow-sm bg-[#1c4f4a]' : 'text-slate-200 hover:text-white'}`}
             >
               Login
             </button>
             <button 
               onClick={() => setIsLogin(false)} 
-              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${!isLogin ? 'bg-slate-900/90 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 py-1.5 text-sm cursor-pointer font-medium rounded-lg transition-all ${!isLogin ? 'dark:bg-slate-900/90 text-white shadow-sm bg-[#1c4f4a]' : 'text-slate-200 hover:text-white'}`}
             >
               Sign Up
             </button>

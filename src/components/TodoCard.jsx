@@ -10,7 +10,7 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
   // Dynamic Header Background Logic
   let headerBg = 'bg-[#f6b327] text-slate-900'; // Default
   if (todo.status === 'selesai') headerBg = 'bg-[#86bfb9] text-slate-900'; // Success
-  else if (diffDays < 0) headerBg = 'bg-[#E7A491] text-white'; // Terracotta
+  else if (diffDays < 0) headerBg = 'bg-[#d0745d] text-white'; // Terracotta
   else if (diffDays >= 0 && diffDays <= 2) headerBg = 'bg-[#F2C49B] text-slate-800'; // Peach
   else if (diffDays >= 2 && diffDays <= 3) headerBg = 'bg-[#EAD08D] text-slate-800'; // Gold
   else headerBg = 'bg-[#A8BBA2] text-slate-800'; // Sage
@@ -35,7 +35,7 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
       </div>
 
       {/* Body */}
-      <div className="bg-white dark:bg-[#0b0f17] p-5 flex-1 flex flex-col justify-between border-t border-slate-100 dark:border-slate-800">
+      <div className="bg-white dark:bg-[#1a202e] p-5 flex-1 flex flex-col justify-between border-t border-slate-100 dark:border-slate-800">
         <div className="max-h-48 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden space-y-2 mb-4">
           {todo.details.map((detail) => (
             <div 
@@ -43,10 +43,10 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit }) =>
               className="flex items-center cursor-pointer"
               onClick={() => onToggleDetail(todo.id, detail.id)}
             >
-              <div className={`mr-2 ${detail.isDone ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>
+              <div className={`mr-2 ${detail.isDone ? 'text-slate-400 dark:text-slate-400' : 'text-slate-600 dark:text-slate-200'}`}>
                 {detail.isDone ? <CheckSquare size={16} /> : <Square size={16} />}
               </div>
-              <span className={`text-sm ${detail.isDone ? 'line-through text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>
+              <span className={`text-sm ${detail.isDone ? 'line-through text-slate-400 dark:text-slate-400' : 'text-slate-600 dark:text-slate-200'}`}>
                 {detail.teks}
               </span>
             </div>
