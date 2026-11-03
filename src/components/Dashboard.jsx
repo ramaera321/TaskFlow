@@ -11,6 +11,7 @@ const Dashboard = ({
   onAddTodo, 
   onEditTodo, 
   onDeleteTodo, 
+  onResetTodo,
   onToggleDetail, 
   onUpdateStatus, 
   filterStatus, 
@@ -24,7 +25,7 @@ const Dashboard = ({
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0b0f17] text-white' : 'bg-[#f1f2ec] text-slate-800'}`}>
       {/* Header */}
-      <header className="flex justify-between items-center px-6 py-4 shadow mb-4 bg-[#f6b327] text-slate-900">
+      <header className="flex justify-between items-center px-6 py-4 shadow mb-4 bg-[#86bfb9] dark:bg-[#141a25] text-slate-900 dark:text-slate-200">
         <div className="font-bold text-xl">TaskFlow</div>
         <div className="flex gap-4">
           <button onClick={toggleTheme} className="p-2 rounded-full bg-black/10 cursor-pointer">{isDark ? <Sun size={20} /> : <Moon size={20} />}</button>
@@ -54,7 +55,7 @@ const Dashboard = ({
 
         {/* Controls */}
         <div className="flex justify-end gap-3 items-center mb-8">
-          <button onClick={onAddTodo} className="cursor-pointer bg-[#fd671a] hover:bg-[#e0560f] active:scale-[0.98] text-white px-4 py-2 rounded-xl flex items-center gap-2 shadow-md transition-all">
+          <button onClick={onAddTodo} className="cursor-pointer bg-[#fd671a] hover:bg-[#e0560f] active:scale-[0.98] text-white px-2 md:px-4 py-2 rounded-xl flex items-center gap-1 md:gap-2 shadow-md transition-all">
             <Plus size={18} /> Add Todo
           </button>
           <select 
@@ -79,6 +80,7 @@ const Dashboard = ({
               onDelete={onDeleteTodo} 
               onUpdateStatus={onUpdateStatus}
               onEdit={onEditTodo}
+              onReset={onResetTodo}
             />
           ))}
         </div>
