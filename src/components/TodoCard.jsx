@@ -88,7 +88,7 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit, onRe
           <Calendar size={14} className="mr-1 mt-0.5" />
           {todo.tanggal_target}
           {isOverdue && (
-            <span className="text-red-600 font-extrabold text-xs ml-2 uppercase tracking-wider">Overdue</span>
+            <span className="text-red-600 font-extrabold text-xs ml-2 uppercase tracking-wider bg-white rounded px-1.5">Overdue</span>
           )}
         </div>
       </div>
