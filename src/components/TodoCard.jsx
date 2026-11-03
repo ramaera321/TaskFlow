@@ -6,14 +6,26 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit, onRe
   const menuRef = useRef(null);
 
   const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
   const targetDate = new Date(todo.tanggal_target);
   const diffTime = targetDate - today;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+  // Utility isOverdue check
+  const isOverdue = (() => {
+    if (todo.status === 'selesai') {
+      return todo.tanggal_selesai && todo.tanggal_selesai > todo.tanggal_target;
+    }
+    if (todo.status === 'active') {
+      return todayStr > todo.tanggal_target;
+    }
+    return todo.status === 'terlambat';
+  })();
+
   // Dynamic Header Background Logic
   let headerBg = 'bg-[#f6b327] text-slate-900'; // Default
   if (todo.status === 'selesai') headerBg = 'bg-[#86bfb9] text-slate-900'; // Success
-  else if (diffDays < 0) headerBg = 'bg-[#d0745d] text-white'; // Terracotta
+  else if (isOverdue || diffDays < 0) headerBg = 'bg-[#d0745d] text-white'; // Terracotta
   else if (diffDays >= 0 && diffDays <= 2) headerBg = 'bg-[#F2C49B] text-slate-800'; // Peach
   else if (diffDays >= 2 && diffDays <= 3) headerBg = 'bg-[#EAD08D] text-slate-800'; // Gold
   else headerBg = 'bg-[#A8BBA2] text-slate-800'; // Sage
@@ -75,6 +87,9 @@ const TodoCard = ({ todo, onToggleDetail, onDelete, onUpdateStatus, onEdit, onRe
         <div className="flex items-center text-xs font-medium">
           <Calendar size={14} className="mr-1 mt-0.5" />
           {todo.tanggal_target}
+          {isOverdue && (
+            <span className="text-red-600 font-extrabold text-xs ml-2 uppercase tracking-wider">Overdue</span>
+          )}
         </div>
       </div>
 

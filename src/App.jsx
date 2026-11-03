@@ -76,10 +76,21 @@ function App() {
         ...todoToReset,
         status: 'active',
         details: todoToReset.details.map(d => ({ ...d, isDone: false })),
+        tanggal_selesai: null,
         completedAt: undefined
       };
       updateTodo(updatedTodo);
     }
+  };
+
+  const handleUpdateStatus = (todoToUpdate) => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    const updatedTodo = {
+      ...todoToUpdate,
+      status: 'selesai',
+      tanggal_selesai: todayStr
+    };
+    updateTodo(updatedTodo);
   };
 
   useEffect(() => {
@@ -150,7 +161,7 @@ function App() {
         onDeleteTodo={deleteTodo}
         onResetTodo={handleResetTodo}
         onToggleDetail={toggleDetail}
-        onUpdateStatus={updateTodo}
+        onUpdateStatus={handleUpdateStatus}
         filterStatus={filterStatus}
         setFilterStatus={setFilterStatus}
         timeFilter={timeFilter}

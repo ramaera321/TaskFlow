@@ -39,6 +39,19 @@ const Dashboard = ({
     return target >= startOfWeek && target <= endOfWeek;
   };
 
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  const isItemTerlambat = (todo) => {
+    // Kasus 1: Card aktif yang tanggal targetnya sudah terlewat hari ini
+    const isActiveLate = todo.status === 'active' && todayStr > todo.tanggal_target;
+    // Kasus 2: Card selesai yang tanggal selesainya melebihi tanggal target
+    const isCompletedLate = todo.status === 'selesai' && todo.tanggal_selesai && todo.tanggal_selesai > todo.tanggal_target;
+    // Kasus 3: Card yang status eksplisitnya 'terlambat'
+    const isExplicitLate = todo.status === 'terlambat';
+
+    return isActiveLate || isCompletedLate || isExplicitLate;
+  };
+
   // Chained Filtering Logic
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) => {
@@ -46,11 +59,18 @@ const Dashboard = ({
       const matchesWeek = timeFilter === 'All Weeks' || isThisWeek(todo.tanggal_target);
 
       // 2. Status Filter Check
-      const matchesStatus = filterStatus === 'Semua Status' || todo.status === filterStatus.toLowerCase();
+      let matchesStatus = true;
+      if (filterStatus === 'Semua Status') {
+        matchesStatus = true;
+      } else if (filterStatus.toLowerCase() === 'terlambat') {
+        matchesStatus = isItemTerlambat(todo);
+      } else {
+        matchesStatus = todo.status === filterStatus.toLowerCase();
+      }
 
       return matchesWeek && matchesStatus;
     });
-  }, [todos, timeFilter, filterStatus]);
+  }, [todos, timeFilter, filterStatus, todayStr]);
 
   // Slice data untuk pagination
   const visibleTodos = filteredTodos.slice(0, visibleCount);
